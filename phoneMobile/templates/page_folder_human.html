@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    </head>
+    <body>
+        <div class="buttons">
+            <a href="{% url 'create' %}">Добавить запись</a>
+            <a href="/admin/">Добавить объект</a>
+        </div>
+        <h1><a href="{% url 'index' %}">Главная</a> → <a href="{% url 'page_folder' name_page %}">{{name_page}}</a> → {{name_human}}</h1>
+        <div class="line-cards line-cards-add">
+            {% if info == "Записи не найдены" %}
+                <h2>Записи не найдены</h2>
+            {% else %}
+                {% for item_img, item_description, item_time in info %}
+                    <div class="line-card">
+                        <div class="description">
+                            <h2>{{item_time}}</h2>
+                            <h1>{{item_name}}</h1>
+                            <p>{{item_description}}</p>
+                        </div>                    
+                        <div class="images">
+                            {% for img in item_img %}
+                                <img src="/static/uploads/Main/{{img}}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>

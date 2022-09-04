@@ -1,0 +1,105 @@
+a{
+    text-decoration: none;
+}
+
+.buttons{
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+
+.buttons a{
+    padding: 20px;
+    margin: 5px;
+    background-color: rgba(0, 0, 255, 0.3);
+    border-radius: 5px;
+}
+
+.main-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-container>* {
+    flex: 0 0 20%;
+}
+
+.folder{
+    height: 15vw;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.folder img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.line-card{
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 20px;
+    display: flex;
+    padding: 20px;
+}
+
+.line-card .description{
+    min-width: 30%;
+}
+
+.line-card .images{
+    overflow-x: auto;
+    display: flex;
+    max-height: 500px;
+}
+
+.line-card .images img{
+    padding: 20px;
+    object-fit: contain;
+}
+
+.line-cards{
+    display: flex;
+}
+
+.line-cards-add{
+    flex-direction: column;
+}
+
+.create-post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-post label{
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.create-post select{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.create-post textarea{
+    width: 300px
+}
+
+.create-post input[type="submit"]{
+    margin-top: 10px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: white;
+    background-color: rgba(0, 0, 255, 0.3);
+
+}
