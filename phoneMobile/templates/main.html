@@ -15,7 +15,6 @@
             {% for item in all_info %}
                 <a href="{% url 'page_folder' item.name %}">
                     <div class="folder">
-                        <img src="{{item.photo.url}}">
                         <p>{{item.name}}</p>
                     </div>
                 </a>

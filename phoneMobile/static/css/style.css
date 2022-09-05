@@ -20,12 +20,7 @@ a{
     flex-wrap: wrap;
 }
 
-.main-container>* {
-    flex: 0 0 20%;
-}
-
 .folder{
-    height: 15vw;
     padding: 10px;
     margin: 20px;
     border-radius: 10px;
@@ -83,23 +78,71 @@ a{
     font-weight: 400;
 }
 
-.create-post select{
-    width: 300px;
-    height: 30px;
-    border-radius: 5px;
-}
-
-.create-post textarea{
-    width: 300px
-}
-
 .create-post input[type="submit"]{
     margin-top: 10px;
-    height: 40px;
-    padding: 10px;
-    border-radius: 5px;
     border: none;
     background-color: white;
     background-color: rgba(0, 0, 255, 0.3);
 
+}
+
+@media screen and (min-width: 545px) {
+    .main-container>* {
+        flex: 0 0 33.3%;
+    }
+
+    .create-post label{
+        width: 70%;
+        text-align: center;
+    }
+
+    .create-post select{
+        border-radius: 15px;
+        width: 70%;
+        height: 50px;
+    }
+
+    .create-post textarea{
+        border-radius: 15px;
+        width: 70%;
+    }
+
+    #id_photos{
+        font-size: 18px;
+    }
+
+    .create-post input[type="submit"]{
+        height: 60px;
+        padding: 20px;
+        border-radius: 15px;
+        font-size: 18px;
+    }
+}
+
+
+@media screen and (min-width: 1000px) {
+    .main-container>* {
+        flex: 0 0 20%;
+    }
+
+    .create-post select{
+        border-radius: 5px;
+        width: 300px;
+        height: 30px;
+    }
+
+    .create-post textarea{
+        border-radius: 5px;
+        width: 300px;
+    }
+
+    #id_photos{
+        font-size: 14px;
+    }
+
+    .create-post input[type="submit"]{
+        height: 40px;
+        padding: 10px;
+        border-radius: 5px;
+    }
 }
