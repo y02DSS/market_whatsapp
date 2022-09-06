@@ -10,7 +10,7 @@
             <a href="{% url 'create' %}">Добавить запись</a>
             <a href="/admin/">Добавить объект</a>
         </div>
-        <h1><a href="{% url 'index' %}">Главная</a> → <a href="{% url 'page_folder' name_page %}">{{name_page}}</a> → {{name_human}}</h1>
+        <h1 class="name-page"><a href="{% url 'index' %}">Главная</a> → <a href="{% url 'page_folder' name_page %}">{{name_page}}</a> → {{name_human}}</h1>
         <div class="line-cards line-cards-add">
             {% if info == "Записи не найдены" %}
                 <h2>Записи не найдены</h2>

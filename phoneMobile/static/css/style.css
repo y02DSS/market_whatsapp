@@ -4,8 +4,8 @@ a{
 
 .buttons{
     position: absolute;
-    top: 30px;
     right: 0;
+    top: 30px;
 }
 
 .buttons a{
@@ -86,13 +86,22 @@ a{
 }
 
 @media screen and (min-width: 545px) {
+    .name-page{
+        margin-bottom: 150px;
+    }
+
+    .buttons{
+        display: flex;
+        flex-direction: column;
+    }
+
     .buttons a{
-        font-size: 24px;
+        font-size: 32px;
         border-radius: 15px;
     }
 
     .folder{
-        font-size: 24px;
+        font-size: 32px;
     }
 
     .main-container>* {
@@ -100,7 +109,7 @@ a{
     }
 
     .line-card .description p{
-        font-size: 24px;
+        font-size: 32px;
     }
 
     .create-post{
@@ -109,37 +118,48 @@ a{
 
     .create-post label{
         width: 70%;
-        font-size: 24px;
+        font-size: 32px;
+        font-weight: 600;
         text-align: center;
     }
 
     .create-post select{
         border-radius: 15px;
-        font-size: 24px;
+        font-size: 32px;
         width: 70%;
-        height: 50px;
+        height: 80px;
     }
 
     .create-post textarea{
         border-radius: 15px;
-        font-size: 24px;
+        font-size: 32px;
         width: 70%;
     }
 
     #id_photos{
-        font-size: 24px;
+        font-size: 32px;
+        margin-top: 10px;
+        text-align: center;
     }
 
     .create-post input[type="submit"]{
-        height: 60px;
+        height: 80px;
         padding: 20px;
         border-radius: 15px;
-        font-size: 24px;
+        font-size: 32px;
     }
 }
 
 
 @media screen and (min-width: 1000px) {
+    .name-page{
+        margin-bottom: 0px;
+    }
+
+    .buttons{
+        display: block;
+    }
+
     .buttons a{
         font-size: 16px;
         border-radius: 5px;
@@ -160,6 +180,7 @@ a{
     .create-post label{
         width: 300px;
         font-size: 18px;
+        font-weight: 400;
         text-align: center;
     }
 
@@ -178,6 +199,7 @@ a{
 
     #id_photos{
         font-size: 14px;
+        margin-top: 5px;
     }
 
     .create-post input[type="submit"]{

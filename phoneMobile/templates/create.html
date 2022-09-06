@@ -10,7 +10,7 @@
             <a href="{% url 'create' %}">Добавить запись</a>
             <a href="/admin/">Добавить объект</a>
         </div>
-        <h1><a href="{% url 'index' %}">Главная</a> → Добавить запись</h1>
+        <h1 class="name-page"><a href="{% url 'index' %}">Главная</a> → Добавить запись</h1>
         <form enctype="multipart/form-data" method="POST" class="create-post">
             {% csrf_token %}
             {{ form }}
