@@ -3,7 +3,7 @@ from django import forms
 from .models import MainAdmin
 
 class CreatePost(forms.Form):
-    name = forms.ChoiceField(label='Кто публикует?', choices=(("Наташа", "Наташа"), ("Миша", "Миша"), ("Юра", "Юра")))
+    name = forms.ChoiceField(label='Кто публикует?', choices=(("Наташа", "Наташа"), ("Миша", "Миша"), ("Юра", "Юра"), ("Мария С.", "Мария С.")))
     objects = forms.ChoiceField(label='Выбрать объект', choices=[])
     message = forms.CharField(label='Добавьте описание', widget=forms.Textarea, required=False)
     photos = forms.FileField(label='Добавьте фотографии', widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
