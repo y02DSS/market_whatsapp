@@ -58,7 +58,7 @@ def create(request):
             objects = form.cleaned_data["objects"]
             message = form.cleaned_data["message"]
             photos = request.FILES.getlist('photos')
-            dir = 'static\\uploads\\Main\\'
+            dir = 'static/uploads/Main/'
             if not os.path.exists(os.path.dirname(dir)):
                 os.makedirs(os.path.dirname(dir))
             for f in photos:
