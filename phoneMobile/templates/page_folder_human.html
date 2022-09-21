@@ -7,6 +7,7 @@
     </head>
     <body>
         <div class="buttons">
+            <a href="#" id="change_type">Сменить вид</a>
             <a href="{% url 'create' %}">Добавить запись</a>
             <a href="/admin/Main/mainadmin/">Добавить объект</a>
         </div>
@@ -15,11 +16,14 @@
             {% if info == "Записи не найдены" %}
                 <h2>Записи не найдены</h2>
             {% else %}
-                {% for item_img, item_description, item_time in info %}
-                    <div class="line-card">
+                {% for item_img, item_description, item_time, img_zip in info %}
+                    <div class="line-card" id="type_grid">
                         <div class="description">
                             <h1>{{item_time}}</h1>
                             <p>{{item_description}}</p>
+                            <a href="{{img_zip}}" download>
+                                <button class="img_download">Скачать архив</button>
+                            </a>
                         </div>                    
                         <div class="images">
                             {% for img in item_img %}

@@ -5,6 +5,8 @@ from .forms import CreatePost
 
 from datetime import datetime
 import os
+import shutil
+from zipfile import ZipFile
 
 def index(request):
     all_info = MainAdmin.objects.all()
@@ -42,8 +44,8 @@ def page_folder_human(request, name_page, name_human):
             info_temp.append(item["img"])
             info_temp.append(item["description"])
             info_temp.append(item["time"])
+            info_temp.append(f'./static/uploads/zip/{item["name"]}-{item["time"].replace(":", "-").replace("/", "-")}.zip'[1:])
             info_all_temp.append(info_temp)
-    print(info_all_temp)
     return render(request, "page_folder_human.html", {"name_page": name_page, "name_human": name_human, "info": info_all_temp})
 
 
@@ -68,7 +70,13 @@ def create(request):
             all_photos = []
             for photo in photos:
                 all_photos.append(str(photo.name)) 
-                print(photo)      
+
+            with ZipFile(f"{name}.zip", "w") as newzip:
+                for one_photo in all_photos:
+                    newzip.write(f"./static/uploads/Main/{one_photo}")
+
+            shutil.move(f'./{name}.zip', f'./static/uploads/zip/{name}-{time.replace(":", "-").replace("/", "-")}.zip')
+
             entry = [
                 {
                 "name": name,
@@ -79,7 +87,6 @@ def create(request):
             ]
             data = MainAdmin.objects.filter(name=objects)[0].info
             data["posts"] += entry
-            print(data)
             MainAdmin.objects.filter(name=objects).update(info=data)
     else:
         form = CreatePost()
