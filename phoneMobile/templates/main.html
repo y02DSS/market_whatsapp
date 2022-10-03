@@ -4,6 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <script src="{% static 'js/main.js' %}" defer></script>
     </head>
     <body>
         <div class="buttons">
@@ -11,13 +12,29 @@
             <a href="/admin/Main/mainadmin/">Добавить объект</a>
         </div>
         <h1 class="name-page">Главная</h1>
-        <div class="main-container"> 
-            {% for item in all_info %}
-                <a href="{% url 'page_folder' item.name %}">
-                    <div class="folder">
-                        <p>{{item.name}}</p>
-                    </div>
-                </a>
+        <h3>Элементы с разделами</h3>
+        {% for key, value in dict_home %}
+            <div class="folder">
+                <a href="#" name={{key}} class="open-folder"><h3>Раздел - {{key}} (нажми чтобы открыть)</h3></a>
+                <div class="main-container" id={{key}} style="display: none">  
+                    {% for val in value %}
+                        <a href="{% url 'page_folder' val.name %}">
+                            <div class="folder">
+                                <p>{{val.name}}</p>
+                            </div>
+                        </a>
+                    {% endfor %} 
+                </div>
+            </div>
+        {% endfor %}
+        <h3>Элементы без разделов</h3>
+        <div class="main-container">
+            {% for item in list_without_home %}
+                    <a href="{% url 'page_folder' item.name %}">
+                        <div class="folder">
+                            <p>{{item.name}}</p>
+                        </div>
+                    </a>
             {% endfor %}
         </div>
     </body>

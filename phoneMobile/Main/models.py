@@ -9,7 +9,8 @@ class MainAdmin(models.Model):
     group_home = models.CharField(max_length=200, blank=True, null=True)
     info = JSONField(default = default_specific_workouts())
 
-
-
     def __str__(self):
-        return self.name
+        if self.group_home is None:
+            return self.name
+        else:
+            return f'{self.group_home}: {self.name}'

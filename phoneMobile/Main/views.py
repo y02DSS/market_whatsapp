@@ -8,9 +8,30 @@ import os
 import shutil
 from zipfile import ZipFile
 
-def index(request):
+
+def sortByHome():
     all_info = MainAdmin.objects.all()
-    return render(request, "main.html", {"all_info": all_info})
+    list_without_home = []
+    dict_home = {}
+    temp_name_list_home = set()
+    for info in all_info:
+        list_without_home.append(info)
+        if info.group_home:
+            list_without_home.remove(info)
+            temp_name_home = info.group_home
+            if temp_name_home not in temp_name_list_home:
+                temp_name_list_home.add(temp_name_home)
+                temp_list_home = []
+                for name_home in all_info:
+                    if name_home.group_home == temp_name_home:
+                        temp_list_home.append(name_home)
+                dict_home[temp_name_home]=(temp_list_home)
+    return list_without_home, sorted(dict_home.items())
+
+
+def index(request):
+    list_without_home, dict_home = sortByHome()
+    return render(request, "main.html", {"list_without_home": list_without_home, "dict_home": dict_home})
 
 
 def page_folder(request, name_page):
@@ -58,6 +79,7 @@ def create(request):
             objects = form.cleaned_data["objects"]
             message = form.cleaned_data["message"]
             photos = request.FILES.getlist('photos')
+
             dir = 'static/uploads/Main/'
             if not os.path.exists(os.path.dirname(dir)):
                 os.makedirs(os.path.dirname(dir))
@@ -91,4 +113,10 @@ def create(request):
     else:
         form = CreatePost()
     
-    return render(request, "create.html", {"all_info": all_info, 'form': form})
+    list_without_home, dict_home = sortByHome()
+
+
+    return render(request, "create.html", {"all_info": all_info, 
+                                            "dict_home": dict_home, 
+                                            "list_without_home": list_without_home,
+                                            "form": form})
