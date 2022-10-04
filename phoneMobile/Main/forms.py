@@ -43,7 +43,7 @@ class CreatePost(forms.Form):
         complete_without_home = []
         for item in list_without_home:
             complete_without_home.append(item)
-        self.fields['objects_all'].choices = [(str(';'.join([val.name for val in value])), key) for key, value in dict_home] + [(complete_without_home, "Без раздела")]
+        self.fields['objects_all'].choices = [(str(';'.join([val.name for val in value])), key) for key, value in dict_home] + [((str(';'.join([item.name for item in complete_without_home]))), "Без раздела")]
         self.fields['objects'].choices = [(c.name, c.name) for c in MainAdmin.objects.all()]
 
 
