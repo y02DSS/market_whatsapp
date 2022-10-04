@@ -13,7 +13,7 @@
         </div>
         <h1 class="name-page">Главная</h1>
         <h3>Элементы с разделами</h3>
-        {% for key, value in dict_home %}
+        {% for key, value in dict_home.items %}
             <div class="folder">
                 <a href="#" name={{key}} class="open-folder"><h3>Раздел - {{key}} (нажми чтобы открыть)</h3></a>
                 <div class="main-container" id={{key}} style="display: none">  

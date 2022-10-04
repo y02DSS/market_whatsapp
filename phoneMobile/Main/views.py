@@ -26,7 +26,7 @@ def sortByHome():
                     if name_home.group_home == temp_name_home:
                         temp_list_home.append(name_home)
                 dict_home[temp_name_home]=(temp_list_home)
-    return list_without_home, sorted(dict_home.items())
+    return list_without_home, dict_home
 
 
 def index(request):
@@ -72,6 +72,7 @@ def page_folder_human(request, name_page, name_human):
 
 def create(request):
     all_info = MainAdmin.objects.all()
+    download = 0
     if request.method == 'POST':
         form = CreatePost(request.POST, request.FILES)
         if form.is_valid():
@@ -87,6 +88,7 @@ def create(request):
                 with open(dir + str(f), 'wb') as dest:
                     for chunk in f.chunks():
                         dest.write(chunk)
+            
 
             time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             all_photos = []
@@ -94,9 +96,10 @@ def create(request):
                 all_photos.append(str(photo.name)) 
 
             with ZipFile(f"{name}.zip", "w") as newzip:
+                os.chdir('./static/uploads/Main/')
                 for one_photo in all_photos:
-                    newzip.write(f"./static/uploads/Main/{one_photo}")
-
+                    newzip.write(f"{one_photo}")
+            os.chdir('../../../')
             shutil.move(f'./{name}.zip', f'./static/uploads/zip/{name}-{time.replace(":", "-").replace("/", "-")}.zip')
 
             entry = [
@@ -110,6 +113,7 @@ def create(request):
             data = MainAdmin.objects.filter(name=objects)[0].info
             data["posts"] += entry
             MainAdmin.objects.filter(name=objects).update(info=data)
+            download = 1
     else:
         form = CreatePost()
     
@@ -119,4 +123,6 @@ def create(request):
     return render(request, "create.html", {"all_info": all_info, 
                                             "dict_home": dict_home, 
                                             "list_without_home": list_without_home,
-                                            "form": form})
+                                            "form": form,
+                                            "download": download
+                                            })

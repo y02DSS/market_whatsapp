@@ -11,8 +11,8 @@ class CreatePost(forms.Form):
                                                             ("Ровба О", "Ровба О"), ("Чащин А", "Чащин А"),
                                                             ("Фёдоров К", "Фёдоров К"), ("Чепитов Ю", "Чепитов Ю"),
                                                             ("Князев С", "Князев С"), ("Софронова М", "Софронова М")))
-    objects_all = forms.ChoiceField(label='Выбрать раздел', choices=[])
-    objects = forms.ChoiceField(label='Выбрать объект', choices=[])
+    objects_all = forms.ChoiceField(label='Выбрать раздел', error_messages={'required': 'Это поле обязательно к заполнению'}, choices=[])
+    objects = forms.ChoiceField(label='Выбрать объект', error_messages={'required': 'Это поле обязательно к заполнению'}, choices=[])
     message = forms.CharField(label='Добавьте описание', widget=forms.Textarea, required=False)
     photos = forms.FileField(label='Добавьте фотографии', 
                             widget=forms.ClearableFileInput(attrs={'multiple': True}), 

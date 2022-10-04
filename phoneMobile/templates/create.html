@@ -17,6 +17,9 @@
             <label for="id_photos" class="form-download-photos">Загрузить файл(-ы)</label>
             <input type="submit" value="Добавить запись">
         </form>
+        {% if download == 1 %}
+            <h2 style="text-align:center">Загрузка завершена</h2>
+        {% endif %}
         <script src="{% static 'js/create.js' %}"></script>
     </body>
 </html>
