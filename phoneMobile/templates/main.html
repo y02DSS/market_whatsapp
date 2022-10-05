@@ -12,7 +12,7 @@
             <a href="/admin/Main/mainadmin/">Добавить объект</a>
         </div>
         <h1 class="name-page">Главная</h1>
-        <h3>Элементы с разделами</h3>
+        <h2>Элементы с разделами</h2>
         {% for key, value in dict_home.items %}
             <div class="folder">
                 <a href="#" name={{key}} class="open-folder"><h3>Раздел - {{key}} (нажми чтобы открыть)</h3></a>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         {% endfor %}
-        <h3>Элементы без разделов</h3>
+        <h2>Элементы без разделов</h2>
         <div class="main-container">
             {% for item in list_without_home %}
                     <a href="{% url 'page_folder' item.name %}">
