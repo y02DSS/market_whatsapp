@@ -10,7 +10,9 @@ class CreatePost(forms.Form):
                                                             ("Волков С", "Волков С"), ("Шелофастов А", "Шелофастов А"),
                                                             ("Ровба О", "Ровба О"), ("Чащин А", "Чащин А"),
                                                             ("Фёдоров К", "Фёдоров К"), ("Чепитов Ю", "Чепитов Ю"),
-                                                            ("Князев С", "Князев С"), ("Софронова М", "Софронова М")))
+                                                            ("Князев С", "Князев С"), ("Софронова М", "Софронова М"),
+                                                            ("Адиатулина В", "Адиатулина В"), ("Коноплева Е", "Коноплева Е")
+                                                            ))
     objects_all = forms.ChoiceField(label='Выбрать раздел', error_messages={'required': 'Это поле обязательно к заполнению'}, choices=[])
     objects = forms.ChoiceField(label='Выбрать объект', error_messages={'required': 'Это поле обязательно к заполнению'}, choices=[])
     message = forms.CharField(label='Добавьте описание', widget=forms.Textarea, required=False)
@@ -35,7 +37,7 @@ class CreatePost(forms.Form):
                         if name_home.group_home == temp_name_home:
                             temp_list_home.append(name_home)
                     dict_home[temp_name_home]=(temp_list_home)
-        return list_without_home, sorted(dict_home.items())
+        return list_without_home, dict_home.items()
 
     def __init__(self, *args, **kwargs):
         super(CreatePost, self).__init__(*args, **kwargs)
