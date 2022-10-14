@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import MainAdmin
+from .models import NameObject
 from .forms import CreatePost
 
 from datetime import datetime
@@ -10,7 +10,7 @@ from zipfile import ZipFile
 
 
 def sortByHome():
-    all_info = MainAdmin.objects.all()
+    all_info = NameObject.objects.all()
     list_without_home = []
     dict_home = {}
     temp_name_list_home = set()
@@ -34,8 +34,9 @@ def index(request):
     return render(request, "main.html", {"list_without_home": list_without_home, "dict_home": dict_home})
 
 
-def page_folder(request, name_page):
-    info_json = MainAdmin.objects.get(name=name_page)
+def page_folder(request, id):
+    info_json = NameObject.objects.get(id=id)
+    name_page = info_json.name
     info_all_temp = []
     for item in info_json.info["posts"]:
         info_temp = []
@@ -53,11 +54,11 @@ def page_folder(request, name_page):
 
     if len(info_all) == 0:
         info_all = "Записи не найдены"
-    return render(request, "page_folder.html", {"info": info_all, "name_page": name_page})
+    return render(request, "page_folder.html", {"info": info_all, "name_page": name_page, "id": id})
 
 
-def page_folder_human(request, name_page, name_human):
-    info_json = MainAdmin.objects.get(name=name_page)
+def page_folder_human(request, id, name_human):
+    info_json = NameObject.objects.get(id=id)
     info_all_temp = []
     for item in info_json.info["posts"]:
         info_temp = []
@@ -67,11 +68,11 @@ def page_folder_human(request, name_page, name_human):
             info_temp.append(item["time"])
             info_temp.append(f'./static/uploads/zip/{item["name"]}-{item["time"].replace(":", "-").replace("/", "-")}.zip'[1:])
             info_all_temp.append(info_temp)
-    return render(request, "page_folder_human.html", {"name_page": name_page, "name_human": name_human, "info": info_all_temp})
+    return render(request, "page_folder_human.html", {"name_page": id, "name_human": name_human, "info": info_all_temp})
 
 
 def create(request):
-    all_info = MainAdmin.objects.all()
+    all_info = NameObject.objects.all()
     download = 0
     if request.method == 'POST':
         form = CreatePost(request.POST, request.FILES)
@@ -110,9 +111,9 @@ def create(request):
                 "time": time
                 }
             ]
-            data = MainAdmin.objects.filter(name=objects)[0].info
+            data = NameObject.objects.filter(name=objects)[0].info
             data["posts"] += entry
-            MainAdmin.objects.filter(name=objects).update(info=data)
+            NameObject.objects.filter(name=objects).update(info=data)
             download = 1
     else:
         form = CreatePost()

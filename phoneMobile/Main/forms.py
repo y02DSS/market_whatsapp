@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import MainAdmin
+from .models import NameObject
 
 class CreatePost(forms.Form):
     name = forms.ChoiceField(label='Кто публикует?', choices=(("Рюмин А", "Рюмин А"), ("Калиненко В", "Калиненко В"), 
@@ -19,7 +19,7 @@ class CreatePost(forms.Form):
                             required=False)
 
     def sortByHome(self):
-        all_info = MainAdmin.objects.all()
+        all_info = NameObject.objects.all()
         list_without_home = []
         dict_home = {}
         temp_name_list_home = set()
@@ -44,7 +44,7 @@ class CreatePost(forms.Form):
         for item in list_without_home:
             complete_without_home.append(item)
         self.fields['objects_all'].choices = [(str(';'.join([val.name for val in value])), key) for key, value in dict_home] + [((str(';'.join([item.name for item in complete_without_home]))), "Без раздела")]
-        self.fields['objects'].choices = [(c.name, c.name) for c in MainAdmin.objects.all()]
+        self.fields['objects'].choices = [(c.name, c.name) for c in NameObject.objects.all()]
 
 
     def clean_field(self):

@@ -11,7 +11,7 @@ class GroupHome(models.Model):
     def __str__(self):
         return self.name
     
-class MainAdmin(models.Model):  
+class NameObject(models.Model):  
     name = models.CharField(max_length=200)
     group_home = models.ForeignKey(GroupHome, on_delete=models.CASCADE, blank=True, null=True)
     info = JSONField(default = default_specific_workouts())
