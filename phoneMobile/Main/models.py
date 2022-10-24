@@ -4,6 +4,13 @@ from jsonfield import JSONField
 def default_specific_workouts():
     return {"posts": []}
 
+
+class People(models.Model):
+    name_people = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name_people
+
 class GroupHome(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
@@ -21,3 +28,4 @@ class NameObject(models.Model):
             return self.name
         else:
             return f'{self.group_home}: {self.name}'
+

@@ -1,18 +1,9 @@
 from django import forms
 
-from .models import NameObject
+from .models import NameObject, People
 
 class CreatePost(forms.Form):
-    name = forms.ChoiceField(label='Кто публикует?', choices=(("Рюмин А", "Рюмин А"), ("Калиненко В", "Калиненко В"), 
-                                                            ("Маликов В", "Маликов В"), ("Бабаев Д", "Бабаев Д"),
-                                                            ("Краснецов С", "Краснецов С"), ("Лучин М", "Лучин М"),
-                                                            ("Донских А", "Донских А"), ("Мишин П", "Мишин П"),
-                                                            ("Волков С", "Волков С"), ("Шелофастов А", "Шелофастов А"),
-                                                            ("Ровба О", "Ровба О"), ("Чащин А", "Чащин А"),
-                                                            ("Фёдоров К", "Фёдоров К"), ("Чепитов Ю", "Чепитов Ю"),
-                                                            ("Князев С", "Князев С"), ("Софронова М", "Софронова М"),
-                                                            ("Адиатулина В", "Адиатулина В"), ("Коноплева Е", "Коноплева Е")
-                                                            ))
+    name = forms.ChoiceField(label='Кто публикует?')
     objects_all = forms.ChoiceField(label='Выбрать раздел', error_messages={'required': 'Это поле обязательно к заполнению'}, choices=[])
     objects = forms.ChoiceField(label='Выбрать объект', error_messages={'required': 'Это поле обязательно к заполнению'}, choices=[])
     message = forms.CharField(label='Добавьте описание', widget=forms.Textarea, required=False)
@@ -47,6 +38,8 @@ class CreatePost(forms.Form):
             complete_without_home.append(item)
         self.fields['objects_all'].choices = [(str(';'.join([val.name for val in value])), key) for key, value in dict_home] + [((str(';'.join([item.name for item in complete_without_home]))), "Без раздела")]
         self.fields['objects'].choices = [(c.name, c.name) for c in NameObject.objects.all()]
+
+        self.fields['name'].choices = [(people, people) for people in People.objects.all()]
 
 
     def clean_field(self):

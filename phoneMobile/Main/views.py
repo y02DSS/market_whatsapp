@@ -69,7 +69,7 @@ def page_folder_human(request, id, name_human):
             info_temp.append(item["time"])
             info_temp.append(f'./static/uploads/zip/{item["name"]}-{item["time"].replace(":", "-").replace("/", "-")}.zip'[1:])
             info_all_temp.append(info_temp)
-    return render(request, "page_folder_human.html", {"name_page": name_page, "name_human": name_human, "info": info_all_temp})
+    return render(request, "page_folder_human.html", {"name_page": name_page, "name_human": name_human, "info": info_all_temp, "id": id})
 
 
 def create(request):
