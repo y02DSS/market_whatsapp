@@ -5,6 +5,7 @@ const id_objects_all = document.getElementById("id_objects_all")
 id_objects.innerHTML = ''
 
 id_objects_all.addEventListener('click', function() {
+    id_objects_all.click() 
     const new_pre_list = id_objects_all.options[id_objects_all.selectedIndex].value
     const new_list = new_pre_list.split(';')
     while (id_objects.firstChild) {
