@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import NameObject
+from .models import NameObject, GroupHome
 from .forms import CreatePost
 
 from datetime import datetime
@@ -91,7 +91,6 @@ def create(request):
                     for chunk in f.chunks():
                         dest.write(chunk)
             
-
             time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
             all_photos = []
             for photo in photos:
@@ -112,9 +111,14 @@ def create(request):
                 "time": time
                 }
             ]
-            data = NameObject.objects.filter(name=objects)[0].info
+
+            name_group_home = str(request.POST.get("objects_all")).split(";")[-1]
+            id_group_home = GroupHome.objects.get(name=name_group_home).id
+
+            data = NameObject.objects.filter(group_home=id_group_home).get(name=objects).info
             data["posts"] += entry
-            NameObject.objects.filter(name=objects).update(info=data)
+            NameObject.objects.filter(group_home=id_group_home).filter(name=objects).update(info=data)
+            
             download = 1
     else:
         form = CreatePost()

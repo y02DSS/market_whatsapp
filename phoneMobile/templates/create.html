@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load Main_tags %}
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -20,6 +21,6 @@
         {% if download == 1 %}
             <h2 style="text-align:center">Загрузка завершена</h2>
         {% endif %}
-        <script src="{% static 'js/create.js' %}"></script>
+        <script src="{% static 'js/create.js' %}?{% cache_bust %}"></script>
     </body>
 </html>
